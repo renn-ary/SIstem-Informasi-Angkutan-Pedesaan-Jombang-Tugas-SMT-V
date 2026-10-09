@@ -16,8 +16,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $dashboardRole = match (auth()->user()->role) {
+        'penumpang' => 'penumpang',
+        'pengemudi' => 'pengemudi',
+        'admin' => 'admin',
+        'super_admin' => 'super-admin',
+        default => abort(403),
+    };
+
+    return Inertia::render('Dashboard', ['dashboardRole' => $dashboardRole]);
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

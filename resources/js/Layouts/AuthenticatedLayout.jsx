@@ -30,6 +30,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Dashboard
                                 </NavLink>
+                                {user.role === 'super_admin' && <NavLink href={route('users.index')} active={route().current('users.*')}>Kelola Pengguna</NavLink>}
                             </div>
                         </div>
 
@@ -147,6 +148,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
+                            {user.role === 'super_admin' && <ResponsiveNavLink href={route('users.index')}>Kelola Pengguna</ResponsiveNavLink>}
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>

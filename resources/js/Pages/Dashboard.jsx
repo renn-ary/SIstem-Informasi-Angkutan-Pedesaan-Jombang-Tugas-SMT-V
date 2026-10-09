@@ -1,7 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 
-export default function Dashboard() {
+export default function Dashboard({ dashboardRole }) {
+    const user = usePage().props.auth.user;
+    const labels = { penumpang: 'Dashboard Penumpang', pengemudi: 'Dashboard Pengemudi', admin: 'Dashboard Admin', 'super-admin': 'Dashboard Super Admin' };
     return (
         <AuthenticatedLayout
             header={
@@ -16,7 +18,8 @@ export default function Dashboard() {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            You're logged in!
+                            <h3 className="text-lg font-semibold">{labels[dashboardRole] ?? 'Dashboard ROMBONGIN'}</h3>
+                            <p className="mt-2">Selamat datang, {user.name}. Role: {user.role}.</p>
                         </div>
                     </div>
                 </div>

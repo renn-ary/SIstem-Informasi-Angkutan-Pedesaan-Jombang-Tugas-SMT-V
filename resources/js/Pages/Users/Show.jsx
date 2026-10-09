@@ -1,0 +1,3 @@
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, Link } from '@inertiajs/react';
+export default function Show({ user }) { return <AuthenticatedLayout header={<h2 className="text-xl font-semibold">Detail Pengguna</h2>}><Head title="Detail Pengguna"/><div className="mx-auto max-w-3xl space-y-3 p-6">{[['Nama',user.name],['Email',user.email],['Role',user.role],['Status',user.status],['Dibuat',user.created_at]].map(([label,value])=><p key={label}><strong>{label}:</strong> {value}</p>)}<Link href={route('users.edit',user.id)}>Ubah</Link><span> · </span><Link href={route('users.index')}>Kembali</Link></div></AuthenticatedLayout>; }

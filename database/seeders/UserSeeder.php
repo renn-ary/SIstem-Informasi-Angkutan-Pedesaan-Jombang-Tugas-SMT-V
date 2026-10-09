@@ -12,29 +12,29 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'     => 'Masyarakat',
-                'email'    => 'masyarakat@jombangtransit.test',
+                'name'     => 'Penumpang',
+                'email'    => 'penumpang@rombongin.test',
                 'password' => Hash::make('password123'),
-                'role'     => 'masyarakat',
+                'role'     => 'penumpang',
                 'status'   => 'aktif',
             ],
             [
-                'name'     => 'Operator Jombang Transit',
-                'email'    => 'operator@jombangtransit.test',
+                'name'     => 'Pengemudi',
+                'email'    => 'pengemudi@rombongin.test',
                 'password' => Hash::make('password123'),
-                'role'     => 'operator',
+                'role'     => 'pengemudi',
                 'status'   => 'aktif',
             ],
             [
                 'name'     => 'Admin',
-                'email'    => 'admin@jombangtransit.test',
+                'email'    => 'admin@rombongin.test',
                 'password' => Hash::make('password123'),
                 'role'     => 'admin',
                 'status'   => 'aktif',
             ],
             [
                 'name'     => 'Super Admin',
-                'email'    => 'superadmin@jombangtransit.test',
+                'email'    => 'superadmin@rombongin.test',
                 'password' => Hash::make('password123'),
                 'role'     => 'super_admin',
                 'status'   => 'aktif',

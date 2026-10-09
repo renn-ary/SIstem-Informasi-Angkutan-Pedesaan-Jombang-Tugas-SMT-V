@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -50,6 +52,11 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        if ($user->role === 'super_admin' && $user->status === 'aktif'
+            && User::query()->where('role', 'super_admin')->where('status', 'aktif')->count() <= 1) {
+            throw ValidationException::withMessages(['password' => 'Akun Super Admin aktif terakhir tidak dapat dihapus.']);
+        }
 
         Auth::logout();
 
