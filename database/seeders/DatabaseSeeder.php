@@ -11,9 +11,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AngkutanSeeder::class,
             RuteSeeder::class,
+            TitikPemberhentianSeeder::class,
             JadwalSeeder::class,
             TarifSeeder::class,
             VerifikasiSeeder::class,
+            UserSeeder::class,
+            JobSeeder::class,
         ]);
     }
 }
