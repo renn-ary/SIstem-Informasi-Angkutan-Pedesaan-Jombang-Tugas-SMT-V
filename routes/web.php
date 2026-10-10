@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AngkutanController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,10 @@ Route::middleware(['auth', 'role:super_admin'])->group(function () {
 
     Route::resource('users', UserController::class);
 
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('angkutans', AngkutanController::class);
 });
 
 

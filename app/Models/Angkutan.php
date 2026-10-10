@@ -14,7 +14,20 @@ class Angkutan extends Model
         'kode',
         'jenis',
         'status_operasional',
+        'operator_id',
+        'vehicle_number',
+        'license_plate',
+        'capacity',
     ];
+
+    protected $casts = [
+        'capacity' => 'integer',
+    ];
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class, 'operator_id');
+    }
 
     public function rutes()
     {

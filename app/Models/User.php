@@ -47,4 +47,9 @@ protected $fillable = [
             'password' => 'hashed',
         ];
     }
+
+    public function angkutans()
+    {
+        return $this->hasMany(Angkutan::class, 'operator_id');
+    }
 }
