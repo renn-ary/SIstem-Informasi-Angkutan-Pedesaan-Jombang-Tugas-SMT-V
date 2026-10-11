@@ -19,6 +19,7 @@ Teknik Informatika
 
 1. Rendi Asyari - 2495114055
 2. Noval Fajar - 
+3. Muhammad Akbar Din Islami - 2495114049
 
 ## Teknologi
 
