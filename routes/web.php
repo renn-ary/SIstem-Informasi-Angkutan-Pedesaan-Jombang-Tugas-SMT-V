@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AngkutanController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,29 @@ Route::middleware(['auth', 'role:super_admin'])->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('angkutans', AngkutanController::class);
+});
+
+// UC-06: Kelola Transaksi Pemesanan (Penumpang).
+Route::middleware(['auth', 'role:penumpang'])->group(function () {
+    Route::get('transaksis', [TransaksiController::class, 'index'])->name('transaksis.index');
+    Route::get('transaksis/{booking}', [TransaksiController::class, 'show'])->name('transaksis.show');
+    Route::post('transaksis/{booking}/pembayaran', [TransaksiController::class, 'bayar'])->name('transaksis.bayar');
+    Route::post('transaksis/{booking}/pembatalan', [TransaksiController::class, 'batalkan'])->name('transaksis.batalkan');
+});
+
+// UC-07: Pelaporan Layanan Angkutan (Masyarakat/Penumpang mengirim, Admin menindaklanjuti).
+Route::middleware(['auth', 'role:penumpang'])->group(function () {
+    Route::get('reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
+});
+
+Route::middleware(['auth', 'role:penumpang,admin'])->group(function () {
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/{report}', [ReportController::class, 'show'])->name('reports.show');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::put('reports/{report}/tindak-lanjut', [ReportController::class, 'tindakLanjut'])->name('reports.tindak-lanjut');
 });
 
 

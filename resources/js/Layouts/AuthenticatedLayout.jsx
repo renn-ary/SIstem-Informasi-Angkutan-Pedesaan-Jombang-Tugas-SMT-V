@@ -32,6 +32,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </NavLink>
                                 {user.role === 'super_admin' && <NavLink href={route('users.index')} active={route().current('users.*')}>Kelola Pengguna</NavLink>}
                                 {user.role === 'admin' && <NavLink href={route('angkutans.index')} active={route().current('angkutans.*')}>Data Transportasi</NavLink>}
+                                {user.role === 'penumpang' && <NavLink href={route('transaksis.index')} active={route().current('transaksis.*')}>Transaksi</NavLink>}
+                                {['penumpang', 'admin'].includes(user.role) && <NavLink href={route('reports.index')} active={route().current('reports.*')}>Laporan Layanan</NavLink>}
                             </div>
                         </div>
 
@@ -151,6 +153,8 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="mt-3 space-y-1">
                             {user.role === 'super_admin' && <ResponsiveNavLink href={route('users.index')}>Kelola Pengguna</ResponsiveNavLink>}
                             {user.role === 'admin' && <ResponsiveNavLink href={route('angkutans.index')}>Data Transportasi</ResponsiveNavLink>}
+                            {user.role === 'penumpang' && <ResponsiveNavLink href={route('transaksis.index')}>Transaksi</ResponsiveNavLink>}
+                            {['penumpang', 'admin'].includes(user.role) && <ResponsiveNavLink href={route('reports.index')}>Laporan Layanan</ResponsiveNavLink>}
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>
