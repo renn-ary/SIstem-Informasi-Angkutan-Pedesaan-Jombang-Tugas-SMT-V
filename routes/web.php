@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AngkutanController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PerjalananController;
+use App\Http\Controllers\PemesananController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -69,5 +71,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('reports/{report}/tindak-lanjut', [ReportController::class, 'tindakLanjut'])->name('reports.tindak-lanjut');
 });
 
+// UC-03: Cari Perjalanan — publik, tidak memerlukan autentikasi.
+// UC-04: Lihat Detail Perjalanan — publik, tidak memerlukan autentikasi.
+Route::get('perjalanan', [PerjalananController::class, 'index'])->name('perjalanan.index');
+Route::get('perjalanan/{rute}', [PerjalananController::class, 'show'])->name('perjalanan.show');
+
+// UC-05: Pesan Perjalanan — hanya untuk Penumpang yang sudah login.
+Route::middleware(['auth', 'role:penumpang'])->group(function () {
+    Route::get('pemesanan/konfirmasi', [PemesananController::class, 'create'])->name('pemesanan.create');
+    Route::post('pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
+});
 
 require __DIR__.'/auth.php';
