@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 /storage/composer_cache/
+.DS_Store
